@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Winzone</title>
+    <link rel="icon" href="./images/favicon.ico">
     <script>
         (function (d) {
             var config = {
@@ -26,6 +27,19 @@
 
 <body>
     <div class="scroll-container">
+        <div class="loader"></div>
+        <div class="modal-container" id="popupModal">
+            <div class="modal">
+                <img src="./images/plus.svg" alt="" class="modal-close-icon" id="closeModal">
+                <img src="./images/modal-image.png" class="modal-image" alt="">
+                <h1>Spin To <br> <b>Win</b></h1>
+                <a href="" class="cta"><span>Join The WinZone</span></a>
+            </div>
+        </div>
+        <div class="stickyBottom" id="stickyBottom">
+            <h1>Spin To <b>Win</b></h1>
+            <a href="" class="cta"><span>Join The WinZone</span></a>
+        </div>
         <nav>
             <div class="navbar">
                 <img src="./images/the-winzone-logo.svg" class="logo" alt="">
@@ -49,9 +63,9 @@
                         <img src="./images/coins-left.png" class="coins-left" alt="">
                         <img src="./images/dollars.png" class="dollars" alt="">
                         <img src="./images/girl.png" class="girl" alt="">
-                        <img src="./images/sparkle-middle.png" class="sparkle-middle" alt="">
+                        <!-- <img src="./images/sparkle-middle.png" class="sparkle-middle" alt="">
     
-                        <img src="./images/sparkle-right.png" class="sparkle-right" alt="">
+                        <img src="./images/sparkle-right.png" class="sparkle-right" alt=""> -->
                         <img src="./images/seven-icon.png" class="seven-icon" alt="">
                         <img src="./images/money-icon.png" class="money-icon" alt="">
                         <img src="./images/coin-icon.png" class="coin-icon" alt="">
@@ -59,7 +73,10 @@
                 </div>
                 <img src="./images/curtain-right.png" class="curtain-right" alt="">
                 <img src="./images/curtain-left.png" class="curtain-left" alt="">
-                <img src="./images/sparkle-left.png" class="sparkle-left" alt="">
+                <!-- <img src="./images/sparkle-left.png" class="sparkle-left" alt=""> -->
+                <div id="starshine">
+                    <div class="template shine"></div>
+                </div>
             </section>
             <section class="section2">
                 <div class="container">
@@ -128,6 +145,7 @@
                         <a href="" class="cta"><span>Play Now!</span></a>
                     </div>
                     <div class="imageCont">
+                        <!-- <img src="./images/banner4.png" alt="" class="banner4"> -->
                         <img src="./images/sparkle5.png" class="sparkle5" alt="">
                         <img src="./images/sparkle6.png" class="sparkle6" alt="">
                         <img src="./images/games-icons.png" class="games-icons" alt="">
@@ -252,6 +270,7 @@
                         <b>comes to play!</b>
                     </h1>
                     <div class="imageCont">
+                        <!-- <img src="./images/banner6.png" class="banner6" alt=""> -->
                         <img src="./images/section6-sparkle.png" class="sparkle" alt="">
                         <img src="./images/orange-map.png" class="orange-map" alt="">
                         <img src="./images/girl3.png" class="girl3" alt="">
@@ -306,6 +325,7 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
     
 </body>

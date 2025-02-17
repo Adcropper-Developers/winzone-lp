@@ -14,12 +14,54 @@ html {
 main {
     overflow: hidden;
 }
+
 .scroll-container {
     position: fixed;
     overflow-y: auto;
     width: 100%;
     height: 100%;
 }
+.modal-container,
+.stickyBottom {
+    display: none;
+}
+.loader {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    background-color: #FFFFFF;
+  }
+ 
+  .loader::before {
+    content: "";
+    position: static;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 3px solid rgba(104, 38, 198, 1);
+    border-top-color: rgba(255, 255, 255, 0.5);
+    animation: preloader 500ms linear infinite;
+  }
+ 
+  .loader.hidden {
+    display: none;
+  }
+ 
+  .loader.hidden::before {
+    animation: unset;
+  }
+ 
+  @keyframes preloader {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 nav {
     width: 100%;
     display: flex;
@@ -49,7 +91,7 @@ nav {
     color: #FFFFFF;
     text-decoration: none;
     border-radius: 50px;
-    padding: 3px;
+    padding: 0.1875rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,7 +105,7 @@ nav {
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 1;
-    border: 2px solid #824dd4;
+    border: 0.125rem solid #824dd4;
     border-radius: 50px;
     display: flex;
     justify-content: center;
@@ -95,7 +137,10 @@ section {
     align-items: center;
     justify-content: center;
 }
-
+.section1 .container{
+    position: relative;
+    z-index: 2;
+}
 .section1 .curtain-left {
     position: absolute;
     left: 0;
@@ -161,66 +206,75 @@ section {
 }
 
 .section1 .coins-right {
-    width: 25.5rem;
-    bottom: 2rem;
-    right: 2.5rem;
+    width: 48%;
+    bottom: 4%;
+    right: 7%;
     animation-name: slide-right;
     animation-duration: 1s;
     animation-fill-mode: backwards;
-    
+
 }
-@keyframes slide-right{
-    0%{
+
+@keyframes slide-right {
+    0% {
         transform: translateX(100%);
         opacity: 0;
     }
-    100%{
+
+    100% {
         transform: translateX(0rem);
         opacity: 1;
     }
 }
+
 .section1 .coins-middle {
-    width: 24rem;
-    bottom: 0rem;
-    right: 13rem;
+    width: 51%;
+    bottom: 0%;
+    right: 28%;
     animation-name: slide-up;
     animation-duration: 1s;
     animation-delay: 0.5s;
     animation-fill-mode: backwards;
 }
-@keyframes slide-up{
-    0%{
+
+@keyframes slide-up {
+    0% {
         transform: translateY(-100%);
         opacity: 0;
     }
-    100%{
+
+    100% {
         transform: translateY(0rem);
         opacity: 1;
     }
 }
+
 .section1 .coins-left {
-    width: 16rem;
-    bottom: -1rem;
-    right: 26rem;
+    width: 34%;
+    bottom: -4%;
+    right: 57%;
     animation-name: slide-left;
     animation-duration: 1s;
     animation-delay: 1s;
     animation-fill-mode: backwards;
 }
-@keyframes slide-left{
-    0%{
+
+@keyframes slide-left {
+    0% {
         transform: translateX(-100%);
         opacity: 0;
     }
-    100%{
+
+    100% {
         transform: translateX(0rem);
         opacity: 1;
     }
 }
+
 .section1 .dollars {
-    width: 17rem;
-    bottom: -2rem;
-    left: -10rem;
+    width: 35%;
+    bottom: -5%;
+    left: -21%;
     z-index: 1;
     animation-name: slide-left;
     animation-duration: 1s;
@@ -229,14 +283,34 @@ section {
 }
 
 .section1 .girl {
-    width: 23.5rem;
+    width: 50%;
     z-index: 101;
-    left: 13rem;
-    bottom: -0.5rem;
-    animation-name: slide-up;
+    left: 28%;
+    bottom: -1%;
+    animation-name: bounceInRight;
     animation-duration: 1s;
     animation-delay: 2s;
     animation-fill-mode: backwards;
+}
+
+@keyframes bounceInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateX(-30px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .section1 .sparkle-middle {
@@ -263,60 +337,137 @@ section {
 }
 
 .section1 .seven-icon {
-    width: 11.5rem;
-    bottom: 17rem;
-    left: 10.5rem;
-    animation-name:slide-up, swing;
-    animation-duration:1s, 10s;
-    animation-delay: 2.5s,-3s;
-    animation-iteration-count:1, infinite;
+    width: 25%;
+    bottom: 47%;
+    left: 20%;
+    animation-name: slide-up, swing;
+    animation-duration: 1s, 10s;
+    animation-delay: 2.5s, -3s;
+    animation-iteration-count: 1, infinite;
     animation-fill-mode: backwards;
 }
-@keyframes swing{
-    0%,100%{
+
+@keyframes swing {
+
+    0%,
+    100% {
         -webkit-transform: translate(0rem, 0rem);
         transform: translate(0rem, 0rem);
     }
-    
+
     20% {
         -webkit-transform: translate(1rem, -1rem);
         transform: translate(1rem, -1rem);
     }
+
     40% {
         -webkit-transform: translate(-1rem, 1rem);
         transform: translate(-1rem, 1rem);
     }
+
     60% {
         -webkit-transform: translate(0px, 0px);
         transform: translate(0px, 0px);
     }
+
     80% {
         -webkit-transform: translate(1rem, 1rem);
         transform: translate(1rem, 1rem);
     }
 }
+
 .section1 .money-icon {
-    width: 13.5rem;
-    top: -1rem;
-    left: 14.5rem;
-    animation-name:slide-up, swing;
-    animation-duration:1s, 10s;
-    animation-delay: 2.5s,-6s;
-    animation-iteration-count:1, infinite;
+    width: 29%;
+    top: -1%;
+    left: 29%;
+    animation-name: slide-up, swing;
+    animation-duration: 1s, 10s;
+    animation-delay: 2.5s, -6s;
+    animation-iteration-count: 1, infinite;
     animation-fill-mode: backwards;
     z-index: 10;
 }
 
 .section1 .coin-icon {
-    width: 11rem;
-    top: -7rem;
+    width: 25%;
+    top: -12%;
     z-index: 101;
-    right: 10rem;
-    animation-name:slide-up, swing;
-    animation-duration:1s, 10s;
-    animation-delay: 2.5s,-1s;
-    animation-iteration-count:1, infinite;
+    right: 18%;
+    animation-name: slide-up, swing;
+    animation-duration: 1s, 10s;
+    animation-delay: 2.5s, -1s;
+    animation-iteration-count: 1, infinite;
     animation-fill-mode: backwards;
+}
+
+/* glitter effect */
+#starshine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.shine {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-image: url(./images/shine.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    overflow: hidden;
+    z-index: 2;
+    color: transparent;
+    -moz-opacity: 0.0;
+    opacity: 0.0;
+    animation: glitter 6s linear 0s infinite normal;
+    -webkit-animation: glitter 6s linear 0s infinite normal;
+    -moz-animation: glitter 8s linear 0s infinite normal;
+    -ms-animation: glitter 8s linear 0s infinite normal;
+    -o-animation: glitter 8s linear 0s infinite normal;
+}
+
+.shine.small {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.shine.medium {
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
+.shine.large {
+    width: 3.125rem;
+    height: 3.125rem;
+}
+
+/*CSS3 keyframes for glittering effect*/
+@-webkit-keyframes glitter {
+    0% {
+        -webkit-transform: scale(0.3) rotate(0deg);
+        opacity: 0;
+    }
+
+    25% {
+        -webkit-transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+
+    50% {
+        -webkit-transform: scale(0.3) rotate(720deg);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: scale(0.3) rotate(0deg);
+        opacity: 0;
+    }
 }
 
 /* section 2 */
@@ -385,37 +536,44 @@ section {
 
 .section2 .gamesContainer .game {
     width: 16rem;
-    z-index: 1;
+    z-index: 13;
     animation-fill-mode: forwards;
     opacity: 0;
 }
-.section2 .gamesContainer .game:nth-child(2){
+
+.section2 .gamesContainer .game:nth-child(2) {
     animation-delay: 0.2s;
 }
-.section2 .gamesContainer .game:nth-child(3){
+
+.section2 .gamesContainer .game:nth-child(3) {
     animation-delay: 0.4s;
 }
-.section2 .gamesContainer .game:nth-child(4){
+
+.section2 .gamesContainer .game:nth-child(4) {
     animation-delay: 0.6s;
 }
-.section2 .gamesContainer .game:nth-child(5){
+
+.section2 .gamesContainer .game:nth-child(5) {
     animation-delay: 0.8s;
 }
 
-.game-anim{
+.game-anim {
     animation-name: slide-up-2;
     animation-duration: 1s;
 }
-@keyframes slide-up-2{
-    0%{
+
+@keyframes slide-up-2 {
+    0% {
         transform: translateY(-10rem);
         opacity: 0;
     }
-    100%{
+
+    100% {
         transform: translateY(0rem);
         opacity: 1;
     }
 }
+
 .banner2 {
     position: absolute;
     width: 60rem;
@@ -423,86 +581,107 @@ section {
 }
 
 .section2 .octopus {
-    width: 41.5rem;
-    right: 7rem;
-    top: 4.5rem;
+    width: 106%;
+    right: 18%;
+    top: 12%;
     animation-name: octopus-anim;
     animation-duration: 3s;
     animation-iteration-count: infinite;
     z-index: 11;
 }
+
 @keyframes octopus-anim {
-    0%{
+    0% {
         transform: translateY(0);
     }
-    50%{
+
+    50% {
         transform: translateY(-2rem);
     }
-    100%{
+
+    100% {
         transform: translateY(0);
     }
 }
+
 .section2 .coin2-top {
-    width: 29rem;
-    left: 10.5rem;
-    top: -1rem;
+    width: 70%;
+    left: 30%;
+    top: 8%;
+    z-index: 12;
     animation-name: coin2-top-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
 }
+
 @keyframes coin2-top-anim {
-    0%{
+    0% {
         transform: translate(0rem, 0rem);
     }
-    50%{
+
+    50% {
         transform: translate(10rem, 22rem) rotate(45deg);
     }
-    80%,100%{
+
+    80%,
+    100% {
         transform: translate(0rem, 0rem);
     }
 }
+
 .section2 .coin2-bottom {
-    width: 19rem;
-    left: -21rem;
-    bottom: 2rem;
+    width: 48%;
+    left: -55%;
+    bottom: 7%;
     animation-name: coin2-bottom-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
 }
+
 @keyframes coin2-bottom-anim {
-    0%{
+    0% {
         transform: translate(0rem, 0rem);
     }
-    50%{
+
+    50% {
         transform: translate(-8rem, 14rem) rotate(45deg);
     }
-    80%,100%{
+
+    80%,
+    100% {
         transform: translate(0rem, 0rem);
     }
 }
+
 .section2 .ticket-left {
-    width: 8rem;
-    left: -9rem;
-    top: 8rem;
+    width: 20%;
+    left: -23%;
+    top: 24%;
+    z-index: 12;
     animation-name: ticket-left-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
 }
+
 @keyframes ticket-left-anim {
-    0%{
+    0% {
         transform: translate(0rem, 0rem);
     }
-    50%{
-        transform:translate(-33rem, 28rem) rotate(45deg);
+
+    50% {
+        transform: translate(-33rem, 28rem) rotate(45deg);
     }
-    80%,100%{
+
+    80%,
+    100% {
         transform: translate(0rem, 0rem);
     }
 }
+
 .section2 .ticket-right {
-    width: 17rem;
-    right: 0rem;
-    top: 23rem;
+    width: 42%;
+    right: 0;
+    top: 54%;
     animation-name: coin2-top-anim;
     animation-duration: 5s;
     animation-iteration-count: infinite;
@@ -549,124 +728,140 @@ section {
 }
 
 .section3 .slot-machine {
-    width: 45rem;
-    left: -16.5rem;
-    top: -10rem;
+    width: 192%;
+    left: -69%;
+    top: -19%;
     z-index: 2;
     opacity: 0;
     transform: translateY(-100%);
 }
-.slot-anim{
-    animation-name: slide-up,octopus-anim;
+
+.slot-anim {
+    animation-name: slide-up, octopus-anim;
     animation-duration: 1s, 3s;
     animation-delay: 0s, 1s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: forwards;
 
 }
+
 .section3 .ticket3 {
-    width: 28rem;
-    left: -17rem;
-    top: -4rem;
+    width: 124%;
+    left: -76%;
+    top: -9%;
     opacity: 0;
     transform: translateY(-100%);
 }
-.ticket3-anim{
+
+.ticket3-anim {
     animation-name: slide-up, swing;
     animation-duration: 1s, 10s;
     animation-delay: 1s, -1s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: forwards;
 }
+
 .section3 .coin3 {
-    width: 11rem;
-    top: -10rem;
-    left: 0.5rem;
+    width: 49%;
+    top: -25%;
+    left: 5%;
     opacity: 0;
     transform: translateY(-100%);
 }
-.coin3-anim{
+
+.coin3-anim {
     animation-name: slide-up, swing;
     animation-duration: 1s, 10s;
     animation-delay: 1s, -5s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: forwards;
 }
+
 .section3 .card {
-    width: 16rem;
-    left: 9rem;
-    top: -4.5rem;
+    width: 69%;
+    left: 42%;
+    top: -14%;
     opacity: 0;
     transform: translateY(-100%);
 }
-.card-anim{
+
+.card-anim {
     animation-name: slide-up, swing;
     animation-duration: 1s, 10s;
     animation-delay: 1s, -3s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: forwards;
 }
+
 .section3 .seven-icon-2 {
-    width: 27rem;
-    bottom: -10rem;
-    left: -19rem;
+    width: 120%;
+    bottom: -22%;
+    left: -83%;
     z-index: 2;
     opacity: 0;
     transform: translateY(-100%);
 }
-.seven-icon-2-anim{
+
+.seven-icon-2-anim {
     animation-name: slide-up, swing;
     animation-duration: 1s, 10s;
     animation-delay: 1s, -4s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: forwards;
 }
+
 .section3 .gold-card {
-    width: 16rem;
-    bottom: -7rem;
-    left: 7rem;
+    width: 66%;
+    bottom: -15%;
+    left: 35%;
     z-index: 2;
     opacity: 0;
     transform: translateY(-100%);
 }
-.gold-card-anim{
+
+.gold-card-anim {
     animation-name: slide-up, swing;
     animation-duration: 1s, 10s;
     animation-delay: 1s, -7s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: forwards;
 }
+
 .section3 .lion {
-    width: 26rem;
-    top: -9rem;
-    left: 28rem;
+    width: 113%;
+    top: -22%;
+    left: 100%;
     animation-name: lion-anim;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
+
 @keyframes lion-anim {
-    0%{
+    0% {
         transform: translateX(0);
     }
-    50%{
+
+    50% {
         transform: translateX(5rem);
     }
-    100%{
+
+    100% {
         transform: translateX(0);
     }
 }
+
 .section3 .sparkle3 {
-    width: 135rem;
-    bottom: -34rem;
-    left: -32rem;
+    width: 590%;
+    bottom: -80%;
+    left: -141%;
     mix-blend-mode: screen;
     z-index: 1;
 }
 
 .section3 .sparkle4 {
-    width: 58rem;
-    bottom: 2rem;
-    left: -19rem;
+    width: 259%;
+    bottom: 4%;
+    left: -79%;
     mix-blend-mode: screen;
 }
 
@@ -745,127 +940,143 @@ section {
 }
 
 .section4 .games-icons {
-    width: 42rem;
-    bottom: -13rem;
-    left: -15rem;
+    width: 190%;
+    bottom: -33%;
+    left: -68%;
     opacity: 0;
     transform: translateY(-100%);
 }
-.games-icons-anim{
+
+.games-icons-anim {
     animation-name: slide-up;
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
+
 .section4 .girl2 {
-    width: 20.5rem;
-    top: 0.5rem;
-    left: 0.5rem;
+    width: 88%;
+    top: 1%;
+    left: 3%;
     opacity: 0;
     transform: translateX(-100%);
 }
-.girl2-anim{
+
+.girl2-anim {
     animation-name: slide-right;
     animation-duration: 1s;
     animation-fill-mode: forwards;
     animation-delay: 1s;
 }
+
 .section4 .cash-bag {
-    width: 20.5rem;
-    bottom: 1rem;
-    right: -14rem;
+    width: 88%;
+    bottom: -1%;
+    right: -68%;
     opacity: 0;
     transform: translateY(-100%);
 }
-.cash-bag-anim{
+
+.cash-bag-anim {
     animation-name: slide-up;
     animation-duration: 1s;
     animation-delay: 3s;
     animation-fill-mode: forwards;
 }
+
 .section4 .pragmatic-play {
-    width: 11rem;
-    left: -15.5rem;
-    top: 15.5rem;
+    width: 49%;
+    left: -72%;
+    top: 35%;
     transform: translateX(-100%);
     opacity: 0;
-    
+
 }
-.pragmatic-play-anim{
+
+.pragmatic-play-anim {
     animation-name: slide-left, swing;
     animation-duration: 1s, 10s;
     animation-delay: 2s, 3s;
     animation-iteration-count: 1, infinite;
-    animation-fill-mode: forwards,forwards;
-  
+    animation-fill-mode: forwards, forwards;
+
 }
+
 .section4 .hacksaw {
-    width: 23rem;
-    left: -17rem;
-    top: -2.5rem;
+    width: 103%;
+    left: -74%;
+    top: -4%;
     transform: translateX(-100%);
     opacity: 0;
 }
-.hacksaw-anim{
+
+.hacksaw-anim {
     animation-name: slide-left, swing;
     animation-duration: 1s, 10s;
     animation-delay: 2s, 3.1s;
     animation-iteration-count: 1, infinite;
-    animation-fill-mode: forwards,forwards;
+    animation-fill-mode: forwards, forwards;
 }
+
 .section4 .evoplay {
-    width: 11.5rem;
-    right: -9rem;
-    top: 0.5rem;
+    width: 52%;
+    right: -44%;
+    top: 2%;
     transform: translateX(100%);
     opacity: 0;
 }
-.evoplay-anim{
+
+.evoplay-anim {
     animation-name: slide-right, swing;
     animation-duration: 1s, 10s;
     animation-delay: 2s, 3.5s;
     animation-iteration-count: 1, infinite;
-    animation-fill-mode: forwards,forwards;
+    animation-fill-mode: forwards, forwards;
 }
+
 .section4 .playn-go {
-    width: 8.5rem;
-    right: -9rem;
-    top: 6.5rem;
+    width: 38%;
+    right: -38%;
+    top: 15%;
     transform: translateX(100%);
     opacity: 0;
 }
-.playn-go-anim{
+
+.playn-go-anim {
     animation-name: slide-right, swing;
     animation-duration: 1s, 10s;
     animation-delay: 2s, 3.2s;
     animation-iteration-count: 1, infinite;
-    animation-fill-mode: forwards,forwards;
+    animation-fill-mode: forwards, forwards;
 }
+
 .section4 .relax-gaming {
-    width: 8rem;
-    right: -5rem;
-    top: 13rem;
+    width: 34%;
+    right: -24%;
+    top: 32%;
     transform: translateX(100%);
     opacity: 0;
 }
-.relax-gaming-anim{
+
+.relax-gaming-anim {
     animation-name: slide-right, swing;
     animation-duration: 1s, 10s;
     animation-delay: 2s, 3.3s;
     animation-iteration-count: 1, infinite;
-    animation-fill-mode: forwards,forwards;
+    animation-fill-mode: forwards, forwards;
 }
+
 .section4 .sparkle5 {
     mix-blend-mode: screen;
-    width: 67rem;
-    bottom: -11rem;
-    right: -20rem;
+    width: 291%;
+    bottom: -26%;
+    right: -88%;
 }
 
 .section4 .sparkle6 {
     mix-blend-mode: screen;
-    width: 67rem;
-    top: -7rem;
-    right: -20rem;
+    width: 282%;
+    top: -20%;
+    right: -78%;
 }
 
 /* section 5 */
@@ -1048,123 +1259,140 @@ section {
 }
 
 .section6 .sparkle {
-    width: 68rem;
+    width: 180%;
     mix-blend-mode: screen;
-    top: -37rem;
-    left: -16rem;
+    top: -95%;
+    left: -51%;
 }
 
 .section6 .orange-map {
-    width: 82rem;
-    top: -18.5rem;
-    right: -18rem;
+    width: 164%;
+    top: -44%;
+    right: -36%;
     opacity: 0;
     transform: translateY(-100%);
 }
-.orange-map-anim{
+
+.orange-map-anim {
     animation-name: slide-up;
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
+
 .section6 .girl3 {
-    width: 20.5rem;
-    right: -20.5rem;
-    top: 0rem;
+    width: 44%;
+    right: -44%;
+    top: -4%;
     z-index: 1;
     transform: translateY(100%);
     opacity: 0;
 }
-.girl3-anim{
+
+.girl3-anim {
     animation-name: slide-down, octopus-anim;
     animation-duration: 1s, 2s;
     animation-delay: 1s, 2.5s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: forwards, forwards;
 }
+
 @keyframes slide-down {
     0% {
         transform: translateY(100%);
         opacity: 0;
     }
-    
+
     100% {
         transform: translateY(0rem);
         opacity: 1;
     }
 }
+
 .section6 .coin1 {
-    width: 14rem;
-    left: -18.5rem;
-    top: 19.5rem;
+    width: 30%;
+    left: -38%;
+    top: 46%;
     animation-name: section6Coin1Anim;
     animation-duration: 2s;
     animation-iteration-count: infinite;
 }
 
 @keyframes section6Coin1Anim {
-    0%{
+    0% {
         transform: translate(0rem, 0rem) rotate(0deg);
     }
-    50%{
+
+    50% {
         transform: translate(3rem, 4rem) rotate(45deg);
     }
-    100%{
+
+    100% {
         transform: translate(0rem, 0rem) rotate(0deg);
     }
 }
+
 .section6 .coin2 {
-    width: 31rem;
-    left: -20.5rem;
-    top: 15.5rem;
+    width: 64%;
+    left: -23%;
+    top: 32%;
     animation-name: section6Coin2Anim;
     animation-duration: 2s;
     animation-iteration-count: infinite;
 }
+
 @keyframes section6Coin2Anim {
-    0%{
+    0% {
         transform: translate(0rem, 0rem) rotate(0deg);
     }
-    50%{
+
+    50% {
         transform: translate(-8rem, 3rem) rotate(20deg);
     }
-    100%{
+
+    100% {
         transform: translate(0rem, 0rem) rotate(0deg);
     }
 }
+
 .section6 .seven-icon {
-    width: 10rem;
-    top: 19rem;
-    left: -4rem;
+    width: 20%;
+    top: 48%;
+    left: -12%;
     animation-name: swing;
     animation-duration: 10s;
     animation-iteration-count: infinite;
 }
 
 .section6 .ticket {
-    width: 13rem;
-    left: -18rem;
-    top: -4.5rem;
+    width: 26%;
+    left: -36%;
+    top: -10%;
     animation-name: section6TicketAnim;
     animation-duration: 2s;
     animation-iteration-count: infinite;
 }
+
 @keyframes section6TicketAnim {
-    0%{
+    0% {
         transform: translate(0rem, 0rem) rotate(0deg);
     }
-    50%{
+
+    50% {
         transform: translate(4rem, 7rem) rotate(-20deg);
     }
-    100%{
+
+    100% {
         transform: translate(0rem, 0rem) rotate(0deg);
     }
 }
+
 /* section7 */
 .section7 {
     height: 45rem;
     background-image: url(./images/bg-7.jpg);
 }
-.section7 .container{
+
+.section7 .container {
     position: absolute;
 }
 
@@ -1175,13 +1403,15 @@ section {
     justify-content: flex-start;
     gap: 1.75rem;
     animation-name: scroll;
-    animation-duration: 30s;
+    animation-duration: 20s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
-.review-container.paused{
+
+.review-container.paused {
     animation-play-state: paused;
 }
+
 .section7 .review-container:hover {
     animation-play-state: paused;
 }
@@ -1192,7 +1422,8 @@ section {
     }
 
     100% {
-        transform: translateX(calc(((-100% + 1.75rem)*2) + 1.75rem));
+        /* transform: translateX(calc(((-100% + 1.75rem)*2) + 1.75rem)); */
+        transform: translateX(calc(((-36.75rem)*6)));
     }
 }
 
@@ -1301,7 +1532,7 @@ section {
     left: -0.5rem;
 }
 
-.section7 .review-modal{
+.section7 .review-modal {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -1322,34 +1553,39 @@ section {
     user-select: none;
     pointer-events: none;
 }
-.section7 .review-modal h2{
+
+.section7 .review-modal h2 {
     font-size: 1.8rem;
     font-weight: 600;
     color: #000000;
     line-height: 150%;
     margin-bottom: 0.8rem;
 }
-.section7 .review-modal p{
+
+.section7 .review-modal p {
     font-size: 1.1rem;
     font-weight: 400;
     color: #000000;
     line-height: 130%;
     text-align: center;
 }
-.section7 .review-modal.show{
+
+.section7 .review-modal.show {
     opacity: 1;
     transform: translateY(0rem);
     user-select: auto;
     pointer-events: all;
 }
-.section7 .review-modal .modal-close-btn{
+
+.section7 .review-modal .modal-close-btn {
     position: absolute;
     top: 1rem;
     right: 2rem;
     font-size: 2rem;
     cursor: pointer;
 }
-.section7 .man{
+
+.section7 .man {
     position: absolute;
     width: 58rem;
     left: -12rem;
@@ -1357,7 +1593,7 @@ section {
 }
 
 /* footer */
-footer{
+footer {
     background-color: #27272f;
     font-family: "Montserrat", serif;
     display: flex;
@@ -1365,28 +1601,33 @@ footer{
     align-items: center;
     padding: 7rem 0;
 }
-footer .container{
+
+footer .container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
-footer .footer-section1{
+
+footer .footer-section1 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 2rem;
 }
-footer .footer-section1 div{
+
+footer .footer-section1 div {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 2rem;
 }
-footer .footer-section1 div img{
+
+footer .footer-section1 div img {
     width: 9.3rem;
 }
-footer .footer-section1 div .wixui-button{
+
+footer .footer-section1 div .wixui-button {
     font-size: 1rem;
     color: #FFFFFF;
     font-weight: 700;
@@ -1397,37 +1638,42 @@ footer .footer-section1 div .wixui-button{
     cursor: pointer;
     transition: var(--trans1, border-color .4s ease 0s, background-color .4s ease 0s);
 }
-footer .footer-section1 div .wixui-button:hover{
-    background-color: rgb(190,69,255);
+
+footer .footer-section1 div .wixui-button:hover {
+    background-color: rgb(190, 69, 255);
 }
-footer .footer-section1 .links{
+
+footer .footer-section1 .links {
     gap: 2rem;
 }
-footer .footer-section1 .links a{
+
+footer .footer-section1 .links a {
     font-size: 1rem;
     color: #FFFFFF;
     font-weight: 500;
     font-family: "Montserrat", serif;
 }
-footer .footer-section2{
+
+footer .footer-section2 {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
-footer .footer-section2 h2{
+
+footer .footer-section2 h2 {
     color: #FFFFFF;
     font-size: 1rem;
     font-weight: 700;
     font-family: "Montserrat", serif;
 }
 
-footer .footer-section2 img{
+footer .footer-section2 img {
     width: 2.8rem;
 }
 
-footer .footer-section3 p{
+footer .footer-section3 p {
     font-family: "Montserrat", serif;
-    color:#FFFFFF;
+    color: #FFFFFF;
     font-weight: 500;
     font-size: 1rem;
     max-width: 29rem;
@@ -1440,23 +1686,471 @@ footer .footer-section3 p{
         font-size: 15px;
     }
 }
+
 @media (max-width: 1600px) {
     html {
         font-size: 14px;
     }
 }
+
 @media (max-width: 1500px) {
     html {
         font-size: 13px;
     }
 }
+
 @media (max-width: 1400px) {
     html {
         font-size: 12px;
     }
 }
+
 @media (max-width: 1250px) {
     html {
         font-size: 11px;
+    }
+}
+@media (max-width: 1150px) {
+    html {
+        font-size: 10px;
+    }
+}
+@media (max-width: 1050px) {
+    html {
+        font-size: 9px;
+    }
+}
+@media (max-width: 950px) {
+    html {
+        font-size: 8px;
+    }
+}
+/** mobile start **/
+@media (max-width: 850px) {
+    html {
+        font-size: 3vw;
+    }
+    nav{
+        height: 35vw;
+    }
+    .navbar{
+        flex-direction: column;
+        justify-content: center;
+        gap: 5vw;
+    }
+    .navbar .logo {
+        width: 35vw;
+    }
+    .section1 .curtain-right,.section1 .curtain-left{
+        height: 140vw;
+    }
+    .section1 {
+        height: 213vw;
+        padding-top: 35vw;
+        background-image: url(./images/mobile-bg-1.jpg);
+    }
+    .section1 .container{
+        flex-direction: column;
+    }
+    .section1 .textCont {
+        width: 100%;
+        align-items: center;
+    }
+    .section1 .textCont h1 {
+        max-width: 54vw;
+        text-align: center;
+        margin-bottom: 43vw;
+        font-size: 15vw;
+    }
+    .section1 .imageCont {
+        position: relative;
+        width: 33rem;
+        height: 32rem;
+        right: -16vw;
+        bottom: 38vw;
+    }
+    .section1 .textCont p {
+        font-size: 5vw;
+        margin-top: 0;
+        margin-bottom: 0;
+        position: absolute;
+        bottom: -73vw;
+        text-align: center;
+    }
+    .section1 .textCont .cta{
+        position: absolute;
+        bottom: -91vw;
+    }
+
+    .section2 {
+        height: 228vw;
+        padding-top: 5rem;
+        background-image: url(./images/mobile-bg-2.jpg);
+    }
+    .section2 .container{
+        padding-right: 0;
+    }
+    .section2 .container .topContainer{
+        flex-direction: column;
+        height: 133vw;
+    }
+    .section2 .textCont {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .section2 .textCont h1{
+        font-size: 3rem;
+    }
+    .section2 .imageCont {
+        position: relative;
+        width: 28rem;
+        height: 35rem;
+        left: 6rem;
+        top: 0rem;
+    }
+    .section2 .gamesContainer .game {
+        width: 12rem;
+    }
+    .section2 .gamesContainer{
+        gap: 1rem;
+        overflow-x: scroll;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .section2 .textCont p {
+        font-size: 5vw;
+        margin-top: 0;
+        margin-bottom: 0;
+        position: absolute;
+        bottom: -155vw;
+        z-index: 100;
+    }
+    .section2 .textCont .cta{
+        position: absolute;
+        bottom: -170vw;
+        z-index: 110;
+    }
+    .section3{
+        height: 230vw;
+        background-image: url(./images/mobile-bg-3.jpg);
+    }
+    .section3 .container{
+        flex-direction: column-reverse;
+    }
+    .section3 .imageCont {
+        position: relative;
+        width: 17rem;
+        height: 32rem;
+        left: 4rem;
+        top: -2rem;
+    }
+    .section3 .textCont {
+        width: 100%;
+        align-items: center;
+        top: -13rem;
+        right: 0;
+        text-align: center;
+    }
+    .section3 .textCont h2 {
+        font-size: 3rem;
+    }
+    .section3 .textCont h1 {
+        font-size: 5.5rem;
+        text-align: center;
+        line-height: 1;
+    }
+    .section3 .lion {
+        width: 113%;
+        top: -22%;
+        left: 24%;
+        z-index: 10;
+    }
+
+    .section3 .textCont .cta{
+        position: absolute;
+        bottom: -165vw;
+    }
+    .section4{
+        background-image: url(./images/mobile-bg-4.jpg);
+        height: 200vw;
+    }
+    .section4 .container{
+        flex-direction: column-reverse;
+    }
+    .section4 .imageCont {
+        position: relative;
+        width: 17rem;
+        height: 31rem;
+        left: 4rem;
+        top: 0rem;
+    }
+    .section4 .girl2{
+        left: 11%;
+        z-index: 2;
+    }
+    .section4 .cash-bag{
+        right: 68%;
+    }
+    .section4 .hacksaw{
+        left: -60%;
+    }
+    .section4 .evoplay {
+        right: -15%;
+        top: 29%;
+    }
+    .section4 .playn-go {
+        right: -15%;
+        top: 42%;
+    }
+    .section4 .relax-gaming {
+        right: -15%;
+        top: 60%;
+    }
+    .section4 .pragmatic-play {
+        left: -62%;
+        top: 32%;
+    }
+    .section4 .sparkle6{
+        display: none;
+    }
+    .section4 .sparkle5 {
+        width: 368%;
+        bottom: -44%;
+        right: -145%;
+    }
+    .section4 .textCont {
+        width: 100%;
+        align-items: center;
+        top: auto;
+        left: auto;
+        text-align: center;
+        margin-top: 2.5rem;
+    }
+    .section5{
+        background-image: url(./images/section5-bg-top.png), url(./images/section5-bg-bottom.png), url(./images/mobile-bg-5.jpg);
+        background-position: -139vw 3vw, -38vw 147vw, bottom center;
+        background-size: 244vw,244vw,cover;
+    }
+    .section5 .open-box {
+        width: 10rem;
+        top: 19rem;
+        right: 0rem;
+    }
+    .swiper{
+        position: relative;
+        top: 4rem;
+    }
+    .section5 .parachute2 {
+        width: 7rem;
+        top: -26rem;
+        left: 2rem;
+    }
+    .section5 .parachute1 {
+        width: 5.5rem;
+        top: -28rem;
+        right: 5rem;
+    }
+    .section6 {
+        height: 200vw;
+        background-image: url(./images/mobile-bg-6.jpg);
+    }
+    .section6 .container h1 {
+        font-size: 13vw;
+        max-width: 75vw;
+        top: 4rem;
+        position: absolute;
+    }
+    .section6 .imageCont {
+        width: 26rem;
+        height: 21rem;
+    }
+    .section6 .girl3 {
+        width: 50%;
+        right: 12%;
+        top: 50%;
+    }
+    .section6 .sparkle{
+        display: none;
+    }
+    .section6 .coin2{
+        left: -1%;
+        top: 40%;
+    }
+    .section6 .coin1 {
+        left: -25%;
+        opacity: 0.6;
+    }
+    .section6 .seven-icon {
+        top: -2%;
+        left: 21%;
+    }
+    .section6 .ticket {
+        left: -27%;
+        top: -53%;
+        opacity: 0.6;
+    }
+    .section7{
+        background-image: url(./images/mobile-bg-7.jpg);
+    }
+    .section7 .man {
+        width: 44rem;
+        left: -12rem;
+        top: -27rem;
+    }
+    .section7 .review-container .review {
+        min-width: 28rem;
+        height: 12rem;
+        padding: 1rem;
+    }
+    .section7 .review-container .review h2 {
+        font-size: 1.5rem;
+    }
+    .section7 .review:nth-child(3n+1):before {
+        width: 4.1rem;
+        height: 4rem;
+        top: -1.5rem;
+        left: -0.5rem;
+    }
+    .section7 .review:nth-child(3n):before {
+        width: 3.8rem;
+        height: 4.93rem;
+        top: -1.5rem;
+        left: -0.5rem;
+    }
+    .section7 .review:nth-child(3n+2):before {
+        width: 5rem;
+        height: 4.75rem;
+        top: -1.5rem;
+        left: -0.5rem;
+    }
+    .section7 .review-container .review p{
+        margin-bottom: 1rem;
+    }
+    footer{
+        padding: 5rem 1rem;
+        padding-bottom: 11rem;
+    }
+    footer .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 4rem;
+    }
+    footer .footer-section1 {
+        gap: 2rem;
+        align-items: center;
+    }
+    footer .footer-section1 .links{
+        text-align: center;
+        justify-content: center;
+    }
+    footer .footer-section3{
+        text-align: center;
+    }
+
+     /** modal **/
+     .modal-container {
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.80);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: -10;
+    }
+
+    .modal-container.show {
+        opacity: 1;
+        z-index: 1000;
+    }
+
+    .modal {
+        border-radius: 5px;
+        background: rgba(104, 38, 198, 1);
+        width: 80vw;
+        height: 108vw;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modal .modal-image {
+        position: absolute;
+        top: -18vw;
+        right: -9vw;
+        width: 99vw;
+    }
+    .modal h1{
+        color: #FFFFFF;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 0;
+        font-size: 14vw;
+        position: absolute;
+        bottom: 20vw;
+    }
+    .modal h1 b{
+        color: #4FE072;
+    }
+
+    .modal .cta {
+        position: absolute;
+        bottom: 5vw;
+    }
+
+    .modal .modal-close-icon {
+        position: absolute;
+        z-index: 10;
+        cursor: pointer;
+        width: 6vw;
+        top: 2vw;
+        right: 2vw;
+    }
+
+    .stickyBottom {
+        position: fixed;
+        z-index: 100;
+        bottom: 0;
+        display: flex;
+        border-radius: 5px;
+        background: #6826C6;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3vw;
+        transition: transform .3s;
+        transform: translateY(100%)
+    }
+    .stickyBottom h1{
+        color: #FFFFFF;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 0;
+        font-size: 8vw;
+    }
+    .stickyBottom h1 b{
+        color: #4FE072;
+    }
+ 
+    .stickyBottom  .cta {
+        font-size: 4vw;
+    }
+    .stickyBottom .cta span{
+        padding: 0.9rem 1.5rem;
+    }
+    .stickyBottom.show {
+        transform: translateY(0)
     }
 }
